@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário e Tabela de Notas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulário e Tabela de Notas</h1>
+    <form id="formulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+        
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" required><br><br>
+        
+        <label for="nota1">Nota 1:</label>
+        <input type="number" id="nota1" name="nota1" step="0.1" required><br><br>
+        
+        <label for="nota2">Nota 2:</label>
+        <input type="number" id="nota2" name="nota2" step="0.1" required><br><br>
+        
+        <button type="button" onclick="adicionarLinha()">Enviar</button>
+    </form>
+
+    <h2>Tabela de Notas</h2>
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Média</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela">
+        </tbody>
+    </table>
+
+    <script>
+        function adicionarLinha() {
+            var nome = document.getElementById("nome").value;
+            var matricula = document.getElementById("matricula").value;
+            var nota1 = parseFloat(document.getElementById("nota1").value);
+            var nota2 = parseFloat(document.getElementById("nota2").value);
+            var media = (nota1 + nota2) / 2;
+            var situacao = (media >= 5) ? "Aprovado" : "Reprovado";
+
+            var tabela = document.getElementById("tabela");
+            var corpoTabela = document.getElementById("corpo-tabela");
+            var novaLinha = document.createElement("tr");
+
+            novaLinha.innerHTML = "<td>" + nome + "</td>" +
+                                  "<td>" + matricula + "</td>" +
+                                  "<td>" + nota1 + "</td>" +
+                                  "<td>" + nota2 + "</td>" +
+                                  "<td>" + media.toFixed(1) + "</td>" +
+                                  "<td>" + situacao + "</td>";
+
+            corpoTabela.appendChild(novaLinha);
+        }
+    </script>
+    <p>A prova foi criada por João Vitor Moura Milanez.</p>
+</body>
+</html>
